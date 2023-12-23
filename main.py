@@ -80,7 +80,7 @@ def register():
             rand = ""
             code = rand.join(str_list)
             # print(code)
-            # send_verification(name, code, email)
+            send_verification(name, code, email)
             return redirect(url_for("register_verify", name=name, email=email, password=password, code=code))
         else:
             error = "Already registered!! Please login"
@@ -175,7 +175,7 @@ def forgot_password():
             rands = ""
             codess = rands.join(str_lists)
             # print(codess)
-            # send_verification(name="", email=email, codes=codess)
+            send_verification(name="", email=email, codes=codess)
             return redirect(url_for("verify", email_code=codess, email=email))
 
     return render_template("forgot.html")
