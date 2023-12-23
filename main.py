@@ -257,7 +257,29 @@ def home():
 @login_required
 def contact():
     return render_template("contact.html", login=db.get_or_404(EcomUsers, current_user.id))
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    if request.method == "POST":
+        datas = request.form
+        send_email(datas["name"], datas["email"], datas["phone"], datas["message"])
+        return render_template("contact.html", msg="Form submission successful!", msg_sent=True,
+                               login=db.get_or_404(EcomUsers, current_user.id))
+    return render_template("contact.html", msg_sent=False, login=db.get_or_404(EcomUsers, current_user.id))
 
+
+
+def send_email(name, email, phone, message):
+    print(name, email, phone, message)
+    username = os.environ.get('email')
+    password = os.environ.get('password')
+    email_message = f"Subject:Form Data Message\n\nHi Ej,\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage:{message}"
+    print(email_message)
+    with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
+        connection.starttls()
+        connection.login(user=username, password=password)
+        connection.sendmail(from_addr=os.environ.get('email'), to_addrs=os.environ.get('to'),
+                            msg=email_message.encode('utf-8'))
+        print("Mail sent")
 
 @app.route('/about')
 @login_required
