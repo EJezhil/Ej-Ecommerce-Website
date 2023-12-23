@@ -415,7 +415,7 @@ def add_product():
 
 
 
-@app.route('/create-checkout-session', methods=["GET",'POST'])
+@app.route('/create-checkout-session', methods=['POST'])
 @login_required
 def create_checkout_session():
     data = []
@@ -478,19 +478,14 @@ def create_checkout_session():
     return redirect(checkout_session.url, code=303)
 
 
-@app.route('/checkout', methods=["GET", "POST"])
-def checkout():
-    return render_template("checkout.html")
-
-
 @app.route('/success', methods=["GET", "POST"])
 def success():
-    return render_template("success.html")
+    return render_template("success.html", login=db.get_or_404(EcomUsers, current_user.id))
 
 
 @app.route('/cancel', methods=["GET", "POST"])
 def cancel():
-    return render_template("cancel.html")
+    return render_template("cancel.html", login=db.get_or_404(EcomUsers, current_user.id))
 
 
 if __name__ == "__main__":
