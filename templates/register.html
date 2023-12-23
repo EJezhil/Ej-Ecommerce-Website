@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛍️EJ E-Commerce Register📝</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  </head>
+<body>
+  {% block content %}
+  {%include "header.html" %}
+
+ <!-- register -->
+<main class="mb-4 mt-5 py-5 px-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+    <form action="{{url_for('register')}}" method="POST">
+    <p style="color:red">{{error}}</p>
+      <div class="mb-3">
+        <input class="form-control" style="width:60%" type="email" name="email" placeholder="Email" required="required" />
+      </div>
+      <div class="mb-3">
+        <input class="form-control" style="width:60%" type="password" name="password" placeholder="Password" required="required" />
+      </div>
+      <div class="mb-3">
+        <input class="form-control" style="width:60%" type="text" name="name" placeholder="Name" required="required" />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block btn-large">Sign Up</button>
+      <br>
+    </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    {% include "footer.html" %}
+    {% endblock %}
+    
+  
