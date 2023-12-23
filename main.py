@@ -358,7 +358,7 @@ def product_details():
 
     id = request.args.get("id")
     result = db.session.execute(
-        db.select(Cart).where((and_(Cart.product_id == id, Cart.author_id == int(current_user.id))))).scalar()
+        db.select(Cart).where((and_(Cart.product_id == id, Cart.author_id == str(current_user.id))))).scalar()
     if result is not None:
         if int(result.author_id) == current_user.id:
             added = True
