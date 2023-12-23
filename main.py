@@ -175,7 +175,7 @@ def forgot_password():
             rands = ""
             codess = rands.join(str_lists)
             # print(codess)
-            send_verification(name="", email=email, codes=codess)
+            send_verification(name=result.name, email=email, codes=codess)
             return redirect(url_for("verify", email_code=codess, email=email))
 
     return render_template("forgot.html")
@@ -275,7 +275,7 @@ def send_email(name, email, phone, message):
     with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
         connection.starttls()
         connection.login(user=username, password=password)
-        connection.sendmail(from_addr=os.environ.get('email'), to_addrs=os.environ.get('to'),
+        connection.sendmail(from_addr=email, to_addrs=username,
                             msg=email_message.encode('utf-8'))
         print("Mail sent")
 
