@@ -253,11 +253,9 @@ def home():
         return render_template("index.html", user=False, logout=logout)
 
 
-@app.route('/contact')
-@login_required
-def contact():
-    return render_template("contact.html", login=db.get_or_404(EcomUsers, current_user.id))
+
 @app.route("/contact", methods=["GET", "POST"])
+@login_required
 def contact():
     if request.method == "POST":
         datas = request.form
